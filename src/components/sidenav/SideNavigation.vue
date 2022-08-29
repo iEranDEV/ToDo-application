@@ -1,35 +1,40 @@
 <template>
-    <div class="h-100 d-flex flex-column justify-content-between">
-        <div style="height: 95%;">
-            <!-- Application logo -->
-            <div class="d-flex align-items-center justify-content-center mb-4">
-                <img src="@/assets/logo.png" alt="ToDo application" class="w-25 rounded">
-                <span class="ms-3 fs-3 text-main">To Do app</span>
+    <div class="h-100 d-flex flex-column justify-content-between" style="height: 100vh;">
+        <div>
+            <div class="w-100">
+                <!-- Application logo -->
+                <div class="d-flex  align-items-center justify-content-center mb-4">
+                    <img src="@/assets/logo.png" alt="ToDo application" class="rounded" style="height: 40px;">
+                    <span class="ms-3 fs-5 text-main">To Do app</span>
+
+                </div>
+
+                <!-- Search input -->
+                <div class="d-none d-xl-block p-1">
+                    <MDBInput white inputGroup class="rounded" v-model="input" aria-describedby="search-icon" label="Wyszukaj"  >
+                        <span class="input-group-text border-0 text-light" id="search-icon"><i class="fas fa-search"></i></span>
+                    </MDBInput>
+                </div>
+                <hr>
+
+                <!-- Main pages section -->
+                <SidenavButton name="Mój dzień" :selected="$route.name == 'MainPage'" toPage="/">
+                    <i class="far fa-calendar me-3 fs-6" style="color: #66BB6A;"></i>
+                </SidenavButton>
+                <SidenavButton name="Ważne" :selected="$route.name == 'ImportantTasksPage'" toPage="/important">
+                    <i class="far fa-star me-3 fs-6 text-warning"></i>
+                </SidenavButton>
+                <SidenavButton name="Ukończone" :selected="$route.name == 'DoneTasksPage'" toPage="/done">
+                    <i class="far fa-check-circle me-3 fs-6" style="color: #E57373;"></i>
+                </SidenavButton>
+                <SidenavButton name="Wszystkie" :selected="$route.name == 'AllTasksPage'" toPage="/all">
+                    <i class="far fa-bookmark me-3 fs-6 text-info"></i>
+                </SidenavButton>
+                <hr>
             </div>
 
-            <!-- Search input -->
-            <MDBInput white inputGroup class="rounded" v-model="input" aria-describedby="search-icon" label="Wyszukaj" >
-                <span class="input-group-text border-0 text-light" id="search-icon"><i class="fas fa-search"></i></span>
-            </MDBInput>
-            <hr>
-
-            <!-- Main pages section -->
-            <SidenavButton name="Mój dzień" :selected="$route.name == 'MainPage'" toPage="/">
-                <i class="far fa-calendar me-3 fs-6" style="color: #66BB6A;"></i>
-            </SidenavButton>
-            <SidenavButton name="Ważne" :selected="$route.name == 'ImportantTasksPage'" toPage="/important">
-                <i class="far fa-star me-3 fs-6 text-warning"></i>
-            </SidenavButton>
-            <SidenavButton name="Ukończone" :selected="$route.name == 'DoneTasksPage'" toPage="/done">
-                <i class="far fa-check-circle me-3 fs-6" style="color: #E57373;"></i>
-            </SidenavButton>
-            <SidenavButton name="Wszystkie" :selected="$route.name == 'AllTasksPage'" toPage="/all">
-                <i class="far fa-bookmark me-3 fs-6 text-info"></i>
-            </SidenavButton>
-            <hr>
-
             <!-- User categories -->
-            <div style="height: 45vh; max-height: 45vh;" class="overflow-auto">
+            <div style="height: 180px;" class="overflow-auto">
                 <SidenavButton v-for="category in store.getCategories" :key="category.name" :name="category.name" :category="category" :toPage="'/category/' + category.id" :selected="$route.name == 'CategoryPage' && $route.params.id == category.id">
                     <i class="far fa-flag me-3 fs-6 text-light"></i>
                 </SidenavButton>
@@ -37,8 +42,8 @@
         </div>
 
         <div class="d-flex align-items-end">
-            <button class="btn btn-dark w-100 d-flex justify-content-between align-items-center shadow-0" @click="categoryModal = true" aria-controls="categoryModal">
-                <i class="fas fa-plus"></i>
+            <button class="btn btn-dark w-100 d-flex justify-content-xl-between align-items-center shadow-0" @click="categoryModal = true" aria-controls="categoryModal">
+                <i class="fas fa-plus text-start me-3 me-xl-0"></i>
                 <span>Dodaj nową kategorie</span>
             </button>
 

@@ -1,9 +1,9 @@
 <template>
 	<div class="row p-0" id="main">
-		<div class="col-lg-2 bg-dark m-0 text-light p-4">
+		<div class="col-xl-2 bg-dark m-0 text-light p-4">
 			<SideNavigation></SideNavigation>
 		</div>
-		<div class="col-12 col-lg-10 m-0 bg-gray text-light p-4">
+		<div class="col-12 col-xl-10 m-0 bg-gray text-light p-4">
 			<router-view @openTaskCreationModal="openTaskCreationModal"></router-view>
 
 			<!-- Task creation modal -->
@@ -19,7 +19,7 @@
 							<MDBSelect id="taskCreationSelect" class="text-light" :options="taskCategoryOptions" :selected="taskData.categoryID" label="Wybierz kategorię" clearButton />
 						</div>
 						<div class="col-12 col-md-6 p-3">
-							<MDBDatepicker inline label="Wybierz datę zadania" inputToggle :toggleButton="false" v-model="taskData.date" format="DD.MM.YYYY" />
+							<MDBDatepicker label="Wybierz datę zadania" inputToggle :toggleButton="false" v-model="taskData.date" format="DD.MM.YYYY" />
 						</div>
 					</div>
 					<MDBCheckbox label="Oznaczyć jako ważne?" v-model="taskData.important" />
@@ -120,7 +120,7 @@ export default {
 }
 
 #main {
-	min-height: 100vh;
+	height: 100vh !important;
 }
 
 .bg-gray {

@@ -20,7 +20,7 @@
                 <task-component v-for="task in store.getTasks" :key="task.id" :task="task"></task-component>
             </div>
         </div>
-        <div class="row d-flex ps-4 pe-4">
+        <div class="row d-flex ps-4 pe-4 mt-3 mt-lg-0">
             <button class="btn btn-dark w-100 p-3 d-flex align-items-center shadow-0 text-info" @click="$emit('openTaskCreationModal')">
                 <i class="fas fa-plus fs-6 me-3"></i>
                 <span class="fs-6">Dodaj nowe zadanie</span>
