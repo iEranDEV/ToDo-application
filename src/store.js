@@ -21,6 +21,16 @@ export const useStore = defineStore('store', {
         // Getting all categories
         getCategories: (state) => state.categories,
 
+        // Getting category by ID
+        getCategoryByID: (state) => {
+            return (categoryID) => state.categories.find((category) => category.id == categoryID)
+        },
+
+        // Getting tasks by category ID
+        getTasksByCategoryID: (state) => {
+            return (categoryID) => state.tasks.filter((task) => task.categoryID == categoryID)
+        },
+
         // Getting important tasks
         getImportantTasks: (state) => state.tasks.filter((task) => task.important),
 

@@ -16,7 +16,11 @@
 					<MDBTextarea white class="rounded mt-3 mb-3" label="Opis zadania" rows="3" v-model="taskData.description" />
 					<div class="row">
 						<div class="col-12 col-md-6 p-3">
-							<MDBSelect id="taskCreationSelect" class="text-light" :options="taskCategoryOptions" :selected="taskData.categoryID" label="Wybierz kategorię" clearButton />
+							<select id="taskCategorySelect" v-model="taskData.categoryID" class="form-control select-input">
+								<option class="bg-dark p-3" :value="category.id" v-for="(category) in store.getCategories" :key="category.id">{{ category.name }}
+								</option>
+							</select>
+							<label for="taskCategorySelect" class="form-label select-label">Wybierz kategorię</label>
 						</div>
 						<div class="col-12 col-md-6 p-3">
 							<MDBDatepicker label="Wybierz datę zadania" inputToggle :toggleButton="false" v-model="taskData.date" format="DD.MM.YYYY" />
@@ -25,7 +29,7 @@
 					<MDBCheckbox label="Oznaczyć jako ważne?" v-model="taskData.important" />
 				</MDBModalBody>
 				<MDBModalFooter class="bg-dark d-flex justify-content-between" style="border: none !important;">
-					<MDBBtn color="danger" @click="taskModal = false">Anuluj</MDBBtn>
+					<MDBBtn color="danger" @click="closeModal()">Anuluj</MDBBtn>
 					<MDBBtn color="success" @click="createTask()">Utwórz</MDBBtn>
 				</MDBModalFooter>
 			</MDBModal>
@@ -36,7 +40,7 @@
 
 <script>
 import SideNavigation from './components/sidenav/SideNavigation.vue'
-import { MDBInput, MDBModal, MDBModalHeader, MDBModalTitle, MDBModalBody, MDBModalFooter, MDBBtn, MDBTextarea, MDBCheckbox, MDBSelect, MDBDatepicker } from 'mdb-vue-ui-kit';
+import { MDBInput, MDBModal, MDBModalHeader, MDBModalTitle, MDBModalBody, MDBModalFooter, MDBBtn, MDBTextarea, MDBCheckbox, MDBDatepicker } from 'mdb-vue-ui-kit';
 import { useStore } from './store.js'
 import { ref } from 'vue';
 
@@ -47,16 +51,7 @@ export default {
 		store.syncWithLocalStorage();
 
 		const taskModal = ref(false);
-		
-		let optionsList = [];
-		for(let category of store.getCategories) {
-			optionsList.push({
-				text: category.name,
-				value: category.id
-			})
-		}
-		const taskCategoryOptions = ref(optionsList);
-		
+	
 		const taskData = ref({
 			name: '',
 			description: '',
@@ -67,9 +62,8 @@ export default {
 
 		return {
 			taskModal,
-			taskCategoryOptions,
 			taskData,
-			store
+			store,
 		}
 
 	},
@@ -84,10 +78,19 @@ export default {
 		MDBBtn,
 		MDBTextarea,
 		MDBCheckbox,
-		MDBSelect,
 		MDBDatepicker,
 	},
 	methods: {
+		closeModal() {
+			this.taskModal = false;
+			this.taskData = ref({
+				name: '',
+				description: '',
+				categoryID: 0,
+				date: null,
+				important: false
+			});
+		},
 		openTaskCreationModal() {
 			this.taskModal = true;
 		},
