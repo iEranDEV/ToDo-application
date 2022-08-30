@@ -15,13 +15,15 @@
             <i v-else class="far fa-star fs-5 text-warning" @click="changeImportantStatus"></i>
         </div>
         <context-menu ref="menu" taskBool>
-            <div class="context-menu-item">
+            <div class="context-menu-item" @click="changeDoneStatus()">
                 <i class="far fa-check-circle me-3"></i>
-                <span>Oznacz jako ukończone</span>
+                <span v-if="data.done">Usuń z ukończonych</span>
+                <span v-else>Oznacz jako ukończone</span>
             </div>
-            <div class="context-menu-item">
+            <div class="context-menu-item" @click="changeImportantStatus()">
                 <i class="far fa-star me-3"></i>
-                <span>Oznacz jako ważne</span>
+                <span v-if="data.important">Usuń z sekcji ważne</span>
+                <span v-else>Oznacz jako ważne</span>
             </div>
             <hr>
             <div class="context-menu-item">

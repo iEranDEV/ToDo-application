@@ -1,7 +1,7 @@
 <template>
     <div class="h-100 w-100 d-flex flex-column justify-content-between" v-if="category">
         <div class="row sticky-top ps-4 pe-4">
-            <div class="col text-info">
+            <div class="col text-secondary">
                 <i class="far fa-bookmark me-3 fs-2"></i>
                 <span class="fs-2">Kategoria - {{ category.name }}</span>
             </div>
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="row d-flex ps-4 pe-4 mt-3 mt-lg-0">
-            <button class="btn btn-dark w-100 p-3 d-flex align-items-center shadow-0 text-info" @click="$emit('openTaskCreationModal')">
+            <button class="btn btn-dark w-100 p-3 d-flex align-items-center shadow-0 text-secondary" @click="$emit('openTaskCreationModal')">
                 <i class="fas fa-plus fs-6 me-3"></i>
                 <span class="fs-6">Dodaj nowe zadanie</span>
             </button>

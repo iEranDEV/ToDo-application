@@ -112,6 +112,15 @@ export const useStore = defineStore('store', {
                 this.tasks.splice(index, 1);
                 localStorage.setItem('tasks', JSON.stringify(this.tasks));
             }
+        },
+
+        // Change category name
+        changeCategoryName(id, newName) {
+            let index = this.categories.findIndex(category => {
+                return category.id == id;
+            })
+            this.categories[index].name = newName;
+            localStorage.setItem('categories', JSON.stringify(this.categories));
         }
     }
 
